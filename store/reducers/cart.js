@@ -25,7 +25,6 @@ export default (state = initialState, action) => {
       } else {
         updateOrNewCartItem = new CartItem(1, prodPrice, prodTitle, prodPrice);
         console.log(updateOrNewCartItem);
-        console.log(id);
       }
       return {
         ...state,
