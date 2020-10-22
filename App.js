@@ -6,12 +6,15 @@ import { Provider } from "react-redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 
 import productsReducer from "./store/reducers/products";
+import oerdersReducer from "./store/reducers/order";
 import CartReducer from "./store/reducers/cart";
+
 import ShopNavigator from "./navigation/shopNavigator";
 
 const rootReducer = combineReducers({
   products: productsReducer,
   cart: CartReducer,
+  orders: oerdersReducer,
 });
 
 const store = createStore(rootReducer, composeWithDevTools());

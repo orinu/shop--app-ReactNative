@@ -9,7 +9,7 @@ import {
   TouchableNativeFeedback,
   Platform,
 } from "react-native";
-import Colors from "../../constants/Color";
+
 import products from "../../store/reducers/products";
 
 const ProductItem = (props) => {
@@ -22,7 +22,7 @@ const ProductItem = (props) => {
   return (
     <View style={styles.products}>
       <View style={styles.touchable}>
-        <TouchableCmp onPress={props.onViewDetail} useForeground>
+        <TouchableCmp onPress={props.onSelect} useForeground>
           <View>
             <View style={styles.imageContainer}>
               <Image
@@ -36,18 +36,7 @@ const ProductItem = (props) => {
               <Text style={styles.title}>{props.title}</Text>
               <Text style={styles.price}>${props.price}</Text>
             </View>
-            <View style={styles.actions}>
-              <Button
-                color={Colors.primary}
-                title="View details"
-                onPress={props.onViewDetail}
-              />
-              <Button
-                color={Colors.primary}
-                title="To cart"
-                onPress={props.onAddToCart}
-              />
-            </View>
+            <View style={styles.actions}>{props.children}</View>
           </View>
         </TouchableCmp>
       </View>
