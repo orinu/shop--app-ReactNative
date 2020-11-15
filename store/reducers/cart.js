@@ -9,7 +9,7 @@ export default (state = initialState, action) => {
   switch (action.type) {
     case "ADD_TO_CART":
       const addProduct = action.product;
-      const prodPrice = addProduct.price;
+      const prodPrice = parseFloat(addProduct.price);
       const prodTitle = addProduct.title;
 
       let updateOrNewCartItem;
@@ -22,9 +22,9 @@ export default (state = initialState, action) => {
           prodTitle,
           state.items[addProduct.id].sum + prodPrice
         );
+        // console.log("updateOrNewCartItem", updateOrNewCartItem);
       } else {
         updateOrNewCartItem = new CartItem(1, prodPrice, prodTitle, prodPrice);
-        console.log(updateOrNewCartItem);
       }
       return {
         ...state,
@@ -55,8 +55,20 @@ export default (state = initialState, action) => {
         items: updatedCartItems,
         totalAmount: state.totalAmount - slectedItem.productPrice,
       };
-      case 'ADD_ORDER': 
-        return initialState;
+    case "DELETE_PRODUCT":
+      if (!state.items[action.pid]) {
+        return state;
+      }
+      const updatedItems = { ...state.items };
+      const itemTotal = state.items[action.pid].sum;
+      delete updatedItems[action.pid];
+      return {
+        ...state,
+        items: updatedItems,
+        totalAmount: state.totalAmount - itemTotal,
+      };
+    case "ADD_ORDER":
+      return initialState;
   }
   return state;
 };

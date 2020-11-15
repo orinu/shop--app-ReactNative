@@ -6,12 +6,16 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
+    case "SET_ORDERS":
+      return {
+        order: action.orders,
+      };
     case "ADD_ORDER":
       const newOrder = new Order(
-        new Date().toString(),
+        action.orderData.id,
         action.orderData.items,
         action.orderData.amount,
-        new Date()
+        action.orderData.date
       );
       return {
         ...state,
